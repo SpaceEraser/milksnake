@@ -26,22 +26,24 @@ fn word_makes_sense(word: &str, wordlist: &[String]) -> i32 {
     return -1;
 }
 
-fn similar_letters() -> std::collections::HashMap<char, Vec<char>> {
-    static CHAR_LIST: &[[char; 2]] = &[
-        ['b', 'd'],
-        ['c', 'o'],
-        ['h', 'n'],
-        ['n', 'm'],
-        ['p', 'q'],
-        ['s', 'z'],
-        ['w', 'm'],
-        ['i', 'j'],
-        ['i', 'l'],
-        ['u', 'v'],
-        ['o', 'q'],
-        ['g', 'q'],
+fn similar_letters() -> std::collections::HashMap<&'static str, Vec<&'static str>> {
+    static CHAR_LIST: &[[&'static str; 2]] = &[
+        ["b", "d"],
+        ["c", "o"],
+        ["h", "n"],
+        ["n", "m"],
+        ["p", "q"],
+        ["s", "z"],
+        ["w", "m"],
+        ["i", "j"],
+        ["i", "l"],
+        ["u", "v"],
+        ["o", "q"],
+        ["g", "q"],
+        ["rn", "m"],
+        ["ln", "h"],
     ];
-    let mut ret: std::collections::HashMap<char, Vec<char>> = std::collections::HashMap::new();
+    let mut ret = std::collections::HashMap::new();
     for &[a, b] in CHAR_LIST {
         ret.entry(a).or_default().push(b);
         ret.entry(b).or_default().push(a);
